@@ -11,6 +11,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Microsoft.OpenApi.Models;
+using rpg.Services.CharacterService;
 
 namespace Rpg
 {
@@ -26,12 +27,14 @@ namespace Rpg
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-
+           //services.AddDbContext<>();
+            services.AddScoped<ICharacterService,CharacterService>();
             services.AddControllers();
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "Rpg", Version = "v1" });
             });
+            services.AddAutoMapper(typeof(Startup)); 
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
